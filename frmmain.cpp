@@ -1,6 +1,7 @@
 #include "frmmain.h"
 #include "ui_frmmain.h"
 #include "api/myhelper.h"
+#include "api/showdatetime.h"
 
 frmMain::frmMain(QWidget *parent):
     QDialog(parent),
@@ -8,6 +9,7 @@ frmMain::frmMain(QWidget *parent):
 {
     ui->setupUi(this);
     InitStyle();
+    InitForm();
 }
 
 frmMain::~frmMain()
@@ -26,7 +28,21 @@ bool frmMain::eventFilter(QObject *obj, QEvent *evt)
 
 void frmMain::on_btnMenu_Max_clicked()
 {
-
+    if (max) {
+        this->setGeometry(location);
+        IconHelper::Instance()->SetIcoNormal(ui->btnMenu_Max);
+        ui->btnMenu_Max->setToolTip("最大化");
+        this->setProperty("CanMove", true);
+        this->layout()->setMargin(1);
+    } else {
+        location = this->geometry();
+        this->setGeometry(qApp->desktop()->availableGeometry());
+        IconHelper::Instance()->SetIcoMax(ui->btnMenu_Max);
+        ui->btnMenu_Max->setToolTip("还原");
+        this->setProperty("CanMove", false);
+        this->layout()->setMargin(0);
+    }
+    max = !max;
 }
 
 void frmMain::InitStyle()
@@ -51,5 +67,17 @@ void frmMain::InitStyle()
 
 void frmMain::InitForm()
 {
+    QFont font = QFont(App::AppFontName, App::AppFontSize - 1);
+    QList<QLabel *> labs = ui->widget_bottom->findChildren<QLabel *>();
+    foreach (QLabel * lab, labs) {
+        lab->setFont(font);
+    }
 
+    ui->lab_Title->setText(App::AppTitle);
+    this->setWindowTitle(ui->lab_Title->text());
+    ui->labWelcome->setText(QString("  欢迎使用%1 %2  |  ").arg(App::AppTitle).arg("V1.0"));
+    ui->labUser->setText(QString("当前用户 : %1【%2】 |  ").arg("admin").arg("管理员"));
+    ShowDateTime *s = new ShowDateTime(this);
+    s->SetLab(ui->labDateTime, ui->labLive);
+    s->Start();
 }

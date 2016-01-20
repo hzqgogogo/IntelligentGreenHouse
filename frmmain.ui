@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>840</width>
-    <height>484</height>
+    <width>890</width>
+    <height>584</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -402,6 +402,13 @@
        <widget class="QLabel" name="labUser">
         <property name="text">
          <string>当前用户:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labLive">
+        <property name="text">
+         <string>已运行:</string>
         </property>
        </widget>
       </item>

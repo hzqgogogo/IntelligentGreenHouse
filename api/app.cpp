@@ -1,13 +1,13 @@
 #include "app.h"
 #include "myhelper.h"
 
-QString App::AppTitle = "智能大棚";
+QString App::AppTitle = "智能大棚管理系统";
 QString App::AppName = "Intelligence";
 QString App::AppPath = "";
 int App::AppFontSize = 10;
 QString App::AppFontName = "Microsoft YaHei";
 
-int App::IcoMain = 0xf099;
+int App::IcoMain = 0xf015;
 int App::IcoMenu = 0xf0d7;
 int App::IcoMin = 0xf068;
 int App::IcoMax = 0xf079;
