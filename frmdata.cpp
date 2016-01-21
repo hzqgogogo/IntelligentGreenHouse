@@ -31,7 +31,6 @@ void frmData::button_clicked()
     QList<QPushButton *> btns = ui->widget_left->findChildren<QPushButton *>();
     foreach (QPushButton *b, btns) {
         b->setChecked(false);
-        qDebug() << "test";
     }
 
     btn->setChecked(true);
