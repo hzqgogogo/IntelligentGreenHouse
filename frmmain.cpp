@@ -24,6 +24,7 @@ bool frmMain::eventFilter(QObject *obj, QEvent *evt)
         this->on_btnMenu_Max_clicked();
         return true;
     }
+
     return QObject::eventFilter(obj, evt);
 }
 

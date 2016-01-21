@@ -127,12 +127,16 @@
             </size>
            </property>
            <property name="text">
-            <string/>
+            <string>数据显示</string>
+           </property>
+           <property name="icon">
+            <iconset resource="other/rc.qrc">
+             <normaloff>:/banner/data.png</normaloff>:/banner/data.png</iconset>
            </property>
            <property name="iconSize">
             <size>
-             <width>35</width>
-             <height>35</height>
+             <width>40</width>
+             <height>40</height>
             </size>
            </property>
            <property name="checkable">
@@ -167,7 +171,17 @@
             </size>
            </property>
            <property name="text">
-            <string/>
+            <string>更多</string>
+           </property>
+           <property name="icon">
+            <iconset resource="other/rc.qrc">
+             <normaloff>:/banner/more.png</normaloff>:/banner/more.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
            </property>
            <property name="checkable">
             <bool>true</bool>
@@ -201,10 +215,23 @@
             </size>
            </property>
            <property name="text">
-            <string/>
+            <string>设置</string>
+           </property>
+           <property name="icon">
+            <iconset resource="other/rc.qrc">
+             <normaloff>:/banner/settings.png</normaloff>:/banner/settings.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
            </property>
            <property name="checkable">
             <bool>true</bool>
+           </property>
+           <property name="toolButtonStyle">
+            <enum>Qt::ToolButtonTextUnderIcon</enum>
            </property>
           </widget>
          </item>
@@ -229,7 +256,17 @@
             </size>
            </property>
            <property name="text">
-            <string/>
+            <string>退出</string>
+           </property>
+           <property name="icon">
+            <iconset resource="other/rc.qrc">
+             <normaloff>:/banner/exit.png</normaloff>:/banner/exit.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
            </property>
            <property name="checkable">
             <bool>true</bool>
@@ -440,6 +477,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="other/rc.qrc"/>
+ </resources>
  <connections/>
 </ui>
