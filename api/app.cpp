@@ -20,7 +20,7 @@ int App::DeskHeight = 900;
 QString App::CurrentUserName = "admin";
 QString App::CurrentUserPwd = "admin";
 
-QString App::AppStyle = ":/qss/blue.css";
+QString App::AppStyle = ":/qss/dev.css";
 QString App::AppCom="COM1";
 
 void App::ReadConfig()
