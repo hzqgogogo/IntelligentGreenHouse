@@ -20,6 +20,7 @@ protected:
 
 private slots:
     void on_btnMenu_Max_clicked();
+    void button_clicked();
 
 private:
     Ui::frmMain *ui;

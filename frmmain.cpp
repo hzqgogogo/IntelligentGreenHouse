@@ -2,6 +2,7 @@
 #include "ui_frmmain.h"
 #include "api/myhelper.h"
 #include "api/showdatetime.h"
+#include "frmdata.h"
 
 frmMain::frmMain(QWidget *parent):
     QDialog(parent),
@@ -80,4 +81,28 @@ void frmMain::InitForm()
     ShowDateTime *s = new ShowDateTime(this);
     s->SetLab(ui->labDateTime, ui->labLive);
     s->Start();
+
+    QList<QToolButton *> btns = ui->widget_top->findChildren<QToolButton *>();
+    foreach (QToolButton *btn, btns) {
+        connect(btn, SIGNAL(clicked()), this, SLOT(button_clicked()));
+    }
+
+    frmData *data = new frmData;
+    ui->stackedWidget->addWidget(data);
+
+    ui->btnData->click();
+}
+
+void frmMain::button_clicked()
+{
+    QToolButton *btn = (QToolButton *)sender();
+
+    QList<QToolButton *> btns = ui->widget_top->findChildren<QToolButton *>();
+    foreach(QToolButton *b, btns)
+    {
+        b->setChecked(false);
+    }
+    btn->setChecked(true);
+
+    ui->stackedWidget->setCurrentIndex(0);
 }
