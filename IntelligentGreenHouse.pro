@@ -32,4 +32,6 @@ FORMS += frmmain.ui \
 INCLUDEPATH += $$PWD
 INCLUDEPATH += $$PWD/usercontrol
 
+win32:RC_FILE   = other/main.rc
+
 RESOURCES += other/rc.qrc
