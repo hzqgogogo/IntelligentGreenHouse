@@ -30,6 +30,12 @@ bool frmMain::eventFilter(QObject *obj, QEvent *evt)
 
 void frmMain::on_btnMenu_Max_clicked()
 {
+    QPropertyAnimation *animation = new QPropertyAnimation(this, "windowOpacity");
+    animation->setDuration(1000);
+    animation->setStartValue(0);
+    animation->setEndValue(1);
+    animation->start();
+
     if (max) {
         this->setGeometry(location);
         IconHelper::Instance()->SetIcoNormal(ui->btnMenu_Max);
@@ -49,6 +55,12 @@ void frmMain::on_btnMenu_Max_clicked()
 
 void frmMain::InitStyle()
 {
+    QPropertyAnimation *animation = new QPropertyAnimation(this, "windowOpacity");
+    animation->setDuration(1000);
+    animation->setStartValue(0);
+    animation->setEndValue(1);
+    animation->start();
+
     this->max = false;
     this->location = this->geometry();
     this->setProperty("Form", true);
@@ -62,7 +74,8 @@ void frmMain::InitStyle()
     IconHelper::Instance()->SetIcoClose(ui->btnMenu_Close);
 
     connect(ui->btnMenu_Min, SIGNAL(clicked()), this, SLOT(showMinimized()));
-    connect(ui->btnMenu_Close, SIGNAL(clicked()), this, SLOT(close()));
+    connect(ui->btnMenu_Close, SIGNAL(clicked()), this, SLOT(closeWidget()));
+    connect(ui->btnExit, SIGNAL(clicked()),this, SLOT(closeWidget()));
 
     ui->widget_title->installEventFilter(this);
 }
@@ -97,6 +110,7 @@ void frmMain::InitForm()
 void frmMain::button_clicked()
 {
     QToolButton *btn = (QToolButton *)sender();
+    QString text = btn->text();
 
     QList<QToolButton *> btns = ui->widget_top->findChildren<QToolButton *>();
     foreach(QToolButton *b, btns)
@@ -105,5 +119,20 @@ void frmMain::button_clicked()
     }
     btn->setChecked(true);
 
-    ui->stackedWidget->setCurrentIndex(0);
+    if(text == "数据显示")
+        ui->stackedWidget->setCurrentIndex(0);
+    else if(text == "更多")
+        ui->stackedWidget->setCurrentIndex(1);
+    else if(text == "设置")
+        ui->stackedWidget->setCurrentIndex(2);
+}
+
+void frmMain::closeWidget()
+{
+    QPropertyAnimation *animation = new QPropertyAnimation(this, "windowOpacity");
+    animation->setDuration(1000);
+    animation->setStartValue(1);
+    animation->setEndValue(0);
+    animation->start();
+    connect(animation, SIGNAL(finished()), this, SLOT(close()));
 }
