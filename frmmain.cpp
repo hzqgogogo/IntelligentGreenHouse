@@ -3,6 +3,8 @@
 #include "api/myhelper.h"
 #include "api/showdatetime.h"
 #include "frmdata.h"
+#include "frmconfig.h"
+#include "frmmore.h"
 
 frmMain::frmMain(QWidget *parent):
     QDialog(parent),
@@ -103,6 +105,10 @@ void frmMain::InitForm()
 
     frmData *data = new frmData;
     ui->stackedWidget->addWidget(data);
+    frmMore *more = new frmMore;
+    ui->stackedWidget->addWidget(more);
+    frmConfig *config = new frmConfig;
+    ui->stackedWidget->addWidget(config);
 
     ui->btnData->click();
 }

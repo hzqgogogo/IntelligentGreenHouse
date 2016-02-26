@@ -15,8 +15,13 @@ public:
     frmConfig(QWidget *parent = NULL);
     ~frmConfig();
 
+private slots:
+    void on_btnConfig_clicked();
+
 private:
     Ui::frmConfig *ui;
+
+    void InitForm();
 };
 
 #endif

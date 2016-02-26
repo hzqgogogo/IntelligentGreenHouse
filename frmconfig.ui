@@ -21,7 +21,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QWidget" name="widget" native="true">
+    <widget class="QWidget" name="widget_left" native="true">
      <property name="minimumSize">
       <size>
        <width>120</width>
@@ -39,6 +39,9 @@
        <widget class="QPushButton" name="btnConfig">
         <property name="text">
          <string>系统设置</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
         </property>
        </widget>
       </item>

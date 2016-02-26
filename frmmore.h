@@ -15,8 +15,13 @@ public:
     frmMore(QWidget *parent = NULL);
     ~frmMore();
 
+private slots:
+    void on_btnMore_clicked();
+
 private:
     Ui::frmMore *ui;
+
+    void InitForm();
 };
 
 #endif

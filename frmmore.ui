@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>710</width>
-    <height>407</height>
+    <width>589</width>
+    <height>284</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,7 +21,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QWidget" name="widget" native="true">
+    <widget class="QWidget" name="widget_left" native="true">
      <property name="minimumSize">
       <size>
        <width>120</width>
@@ -40,6 +40,9 @@
         <property name="text">
          <string>更多</string>
         </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item>
@@ -50,7 +53,7 @@
         <property name="sizeHint" stdset="0">
          <size>
           <width>20</width>
-          <height>381</height>
+          <height>258</height>
          </size>
         </property>
        </spacer>
