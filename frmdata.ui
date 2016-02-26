@@ -44,7 +44,7 @@
       <item>
        <widget class="QPushButton" name="btnData">
         <property name="text">
-         <string/>
+         <string>传感器数据</string>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -99,8 +99,19 @@
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>-1</number>
+         <number>0</number>
         </property>
+        <widget class="QWidget" name="page">
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QTabWidget" name="tabWidget">
+            <property name="currentIndex">
+             <number>-1</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
      </layout>

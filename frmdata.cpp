@@ -1,6 +1,7 @@
 #include "frmdata.h"
 #include "ui_frmdata.h"
 #include <QDebug>
+#include "sensordata.h"
 
 frmData::frmData(QWidget *parent)
     : QWidget(parent),
@@ -34,4 +35,6 @@ void frmData::button_clicked()
     }
 
     btn->setChecked(true);
+//    frmSensorData *sensor = new frmSensorData;
+//    ui->tabWidget->addTab(sensor,"test");
 }

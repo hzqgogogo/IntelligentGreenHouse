@@ -1,4 +1,4 @@
-QT += network sql
+QT += network sql xml
 TARGET = IntelligentGreenHouse
 TEMPLATE = app
 
@@ -12,7 +12,10 @@ SOURCES += main.cpp \
             api/appinit.cpp \
             api/showdatetime.cpp \
             frmdata.cpp \
-            qtsoap.cpp
+            qtsoap.cpp \
+            sensordata.cpp \
+            frmconfig.cpp \
+            frmmore.cpp
 
 HEADERS += frmmain.h \
             usercontrol/frminputbox.h \
@@ -24,12 +27,18 @@ HEADERS += frmmain.h \
             api/appinit.h \
             api/showdatetime.h \
             frmdata.h \
-            qtsoap.h
+            qtsoap.h \
+            sensordata.h \
+            frmconfig.h \
+            frmmore.h
 
 FORMS += frmmain.ui \
             usercontrol/frminputbox.ui \
             usercontrol/frmmessagebox.ui \
-            frmdata.ui
+            frmdata.ui \
+            sensordata.ui \
+            frmconfig.ui \
+            frmmore.ui
 
 INCLUDEPATH += $$PWD
 INCLUDEPATH += $$PWD/usercontrol
