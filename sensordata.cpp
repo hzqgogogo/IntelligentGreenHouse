@@ -7,8 +7,19 @@
 #define TextWidth 1
 #define LineWidth 2
 #define DotWidth 10
+#define Plot_NoColor QColor(0,0,0,0)
+
 #define Plot1_DotColor QColor(5,189,251)
 #define Plot1_LineColor QColor(41,138,220)
+#define Plot1_BGColor QColor(41,138,220,80)
+
+#define Plot2_DotColor QColor(236,110,0)
+#define Plot2_LineColor QColor(246,98,0)
+#define Plot2_BGColor QColor(246,98,0,80)
+
+#define Plot3_DotColor QColor(65,225,36)
+#define Plot3_LineColor QColor(70,210,30)
+#define Plot3_BGColor QColor(70,210,30,80)
 
 frmSensorData::frmSensorData(QWidget *parent)
     : QWidget(parent), ui(new Ui::frmSensorData)
@@ -20,6 +31,9 @@ frmSensorData::frmSensorData(QWidget *parent)
     plots.append(ui->plot_light);
 
     InitPlot();
+    InitPlot1();
+    InitPlot2();
+    InitPlot3();
 }
 
 frmSensorData::~frmSensorData()
@@ -74,5 +88,134 @@ void frmSensorData::InitPlot()
         plot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignTop | Qt::AlignRight);
         plot->legend->setBrush(QColor(255, 255, 255, 200));
         plot->replot();
+    }
+}
+
+void frmSensorData::InitPlot1()
+{
+    plots.at(0)->addGraph();
+    plots.at(0)->graph(0)->setName("温度值(单位:℃)");
+    plots.at(0)->graph(0)->setPen(QPen(Plot1_LineColor, LineWidth));
+    plots.at(0)->graph(0)->setScatterStyle(
+                QCPScatterStyle(QCPScatterStyle::ssCircle,
+                                QPen(Plot1_DotColor, LineWidth),
+                                QBrush(Plot1_DotColor), DotWidth));
+    plots.at(0)->xAxis->setRange(0, 100);
+    plots.at(0)->yAxis->setRange(0, 40);
+}
+
+void frmSensorData::InitPlot2()
+{
+    plots.at(1)->addGraph();
+    plots.at(1)->graph(0)->setName("湿度值(单位:%)");
+    plots.at(1)->graph(0)->setPen(QPen(Plot2_LineColor,LineWidth));
+    plots.at(1)->graph(0)->setScatterStyle(
+                QCPScatterStyle(QCPScatterStyle::ssCircle,
+                                QPen(Plot2_DotColor,LineWidth),
+                                QBrush(Plot2_DotColor), DotWidth));
+    plots.at(1)->xAxis->setRange(0, 100);
+    plots.at(1)->yAxis->setRange(0, 100);
+}
+
+void frmSensorData::InitPlot3()
+{
+    plots.at(2)->addGraph();
+    plots.at(2)->graph(0)->setName("光照值(单位：lx)");
+    plots.at(2)->graph(0)->setPen(QPen(Plot3_LineColor, LineWidth));
+    plots.at(2)->graph(0)->setScatterStyle(
+                QCPScatterStyle(QCPScatterStyle::ssCircle,
+                                QPen(Plot3_DotColor,LineWidth),
+                                QBrush(Plot3_DotColor), DotWidth));
+    plots.at(2)->xAxis->setRange(0, 100);
+    plots.at(2)->yAxis->setRange(0, 1000);
+}
+
+void frmSensorData::on_ckMove_stateChanged(int state)
+{
+    bool value = (state == 0 ? false : true);
+    foreach(QCustomPlot *plot, plots){
+        if (value) {
+            plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+        } else {
+            plot->setInteractions(QCP::iSelectOther);
+        }
+        plot->replot();
+    }
+}
+
+void frmSensorData::on_ckBackground_stateChanged(int state)
+{
+    bool value = (state == 0 ? false : true);
+    if (value) {
+        plots[0]->graph(0)->setBrush(QBrush(Plot1_BGColor));
+        plots[1]->graph(0)->setBrush(QBrush(Plot2_BGColor));
+        plots[2]->graph(0)->setBrush(QBrush(Plot3_BGColor));
+    } else {
+        plots[0]->graph(0)->setBrush(QBrush(Plot_NoColor));
+        plots[1]->graph(0)->setBrush(QBrush(Plot_NoColor));
+        plots[2]->graph(0)->setBrush(QBrush(Plot_NoColor));
+    }
+    plots[0]->replot();
+    plots[1]->replot();
+    plots[2]->replot();
+}
+
+void frmSensorData::on_ckLegend_stateChanged(int state)
+{
+    bool value = (state == 0 ? false : true);
+    foreach(QCustomPlot *plot, plots){
+        plot->legend->setVisible(value);
+        plot->replot();
+    }
+}
+
+void frmSensorData::on_ckXGrid_stateChanged(int state)
+{
+    bool value = (state == 0 ? false : true);
+    foreach(QCustomPlot *plot, plots){
+        plot->xAxis->grid()->setSubGridVisible(value);
+        plot->replot();
+    }
+}
+
+void frmSensorData::on_ckYGrid_stateChanged(int state)
+{
+    bool value = (state == 0 ? false : true);
+    foreach(QCustomPlot *plot, plots){
+        plot->yAxis->grid()->setSubGridVisible(value);
+        plot->replot();
+    }
+}
+
+void frmSensorData::on_ckTemperatureData_stateChanged(int state)
+{
+    bool value = (state == 0 ? false : true);
+    if(value){
+        plots.at(0)->show();
+    }
+    else{
+        plots.at(0)->hide();
+    }
+}
+
+void frmSensorData::on_ckHumidityData_stateChanged(int state)
+{
+    bool value = (state == 0 ? false : true);
+    if(value){
+        plots.at(1)->show();
+    }
+    else{
+        plots.at(1)->hide();
+    }
+}
+
+void frmSensorData::on_ckLightData_stateChanged(int state)
+{
+    bool value = (state == 0 ? false : true);
+    if(value){
+        plots.at(2)->show();
+    }
+    else{
+        plots.at(2)->hide();
     }
 }

@@ -35,6 +35,6 @@ void frmData::button_clicked()
     }
 
     btn->setChecked(true);
-//    frmSensorData *sensor = new frmSensorData;
-//    ui->tabWidget->addTab(sensor,"test");
+    frmSensorData *sensor = new frmSensorData;
+    ui->tabWidget->addTab(sensor,"test");
 }
