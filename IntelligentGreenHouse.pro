@@ -15,7 +15,8 @@ SOURCES += main.cpp \
             qtsoap.cpp \
             sensordata.cpp \
             frmconfig.cpp \
-            frmmore.cpp
+            frmmore.cpp \
+            frmlogin.cpp
 
 HEADERS += frmmain.h \
             usercontrol/frminputbox.h \
@@ -30,7 +31,8 @@ HEADERS += frmmain.h \
             qtsoap.h \
             sensordata.h \
             frmconfig.h \
-            frmmore.h
+            frmmore.h \
+            frmlogin.h
 
 FORMS += frmmain.ui \
             usercontrol/frminputbox.ui \
@@ -38,7 +40,8 @@ FORMS += frmmain.ui \
             frmdata.ui \
             sensordata.ui \
             frmconfig.ui \
-            frmmore.ui
+            frmmore.ui \
+            frmlogin.ui
 
 INCLUDEPATH += $$PWD
 INCLUDEPATH += $$PWD/usercontrol

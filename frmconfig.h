@@ -17,6 +17,7 @@ public:
 
 private slots:
     void on_btnConfig_clicked();
+    void on_btnUpdata_clicked();
 
 private:
     Ui::frmConfig *ui;

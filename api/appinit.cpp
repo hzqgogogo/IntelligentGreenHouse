@@ -43,9 +43,9 @@ void AppInit::Load()
     App::AppPath = QApplication::applicationDirPath();
     App::ReadConfig();
     myHelper::SetStyle(App::AppStyle);
-/*
+
     //程序启动后打开数据库连接,在任何窗体需要的地方调用数据库
-    QString dbPath=App::AppPath + "/myCS.db";
+    QString dbPath=App::AppPath + "/myData.db";
     if (!myHelper::FileIsExist(dbPath)){
         myHelper::ShowMessageBoxError("数据库不存在!程序将自动关闭!");
         exit(0);
@@ -58,5 +58,4 @@ void AppInit::Load()
         myHelper::ShowMessageBoxError("数据库打开失败,请检查数据库是否存在或者连接是否正常!");
         exit(0);
     }
- */
 }

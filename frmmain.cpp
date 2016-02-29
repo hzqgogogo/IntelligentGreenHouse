@@ -11,6 +11,7 @@ frmMain::frmMain(QWidget *parent):
     ui(new Ui::frmMain)
 {
     ui->setupUi(this);
+    myHelper::FormInCenter(this);
     InitStyle();
     InitForm();
 }
@@ -80,6 +81,7 @@ void frmMain::InitStyle()
     connect(ui->btnExit, SIGNAL(clicked()),this, SLOT(closeWidget()));
 
     ui->widget_title->installEventFilter(this);
+    ui->btnMenu_Max->click();
 }
 
 void frmMain::InitForm()

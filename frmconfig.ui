@@ -89,7 +89,7 @@
       </property>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="labOldPasswd">
          <property name="text">
           <string>原密码：</string>
          </property>
@@ -99,7 +99,7 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="le_old_passwd">
+        <widget class="QLineEdit" name="leOldPasswd">
          <property name="inputMethodHints">
           <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText</set>
          </property>
@@ -109,7 +109,7 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="labNewPasswd">
          <property name="text">
           <string>新密码：</string>
          </property>
@@ -119,14 +119,14 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="le_new_passwd">
+        <widget class="QLineEdit" name="leNewPasswd">
          <property name="echoMode">
           <enum>QLineEdit::Password</enum>
          </property>
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QLabel" name="label_3">
+        <widget class="QLabel" name="labPasswdAgain">
          <property name="text">
           <string>确认密码：</string>
          </property>
@@ -136,19 +136,19 @@
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QLineEdit" name="le_passwd_again">
+        <widget class="QLineEdit" name="lePasswdAgain">
          <property name="echoMode">
           <enum>QLineEdit::Password</enum>
          </property>
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QPushButton" name="btn_updata">
+        <widget class="QPushButton" name="btnUpdata">
          <property name="text">
           <string>确认修改</string>
          </property>
          <property name="autoDefault">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
