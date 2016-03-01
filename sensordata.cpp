@@ -29,6 +29,7 @@ frmSensorData::frmSensorData(QWidget *parent)
     plots.append(ui->plot_temperature);
     plots.append(ui->plot_humidity);
     plots.append(ui->plot_light);
+    isOff = true;
 
     InitPlot();
     InitPlot1();
@@ -217,5 +218,19 @@ void frmSensorData::on_ckLightData_stateChanged(int state)
     }
     else{
         plots.at(2)->hide();
+    }
+}
+
+void frmSensorData::on_btnSwitch_clicked()
+{
+    if(isOff)
+    {
+        ui->btnSwitch->setIcon(QIcon(":/image/switch_on.png"));
+        isOff = false;
+    }
+    else
+    {
+        ui->btnSwitch->setIcon(QIcon(":/image/switch_off.png"));
+        isOff = true;
     }
 }

@@ -24,10 +24,12 @@ private slots:
     void on_ckTemperatureData_stateChanged(int state);
     void on_ckHumidityData_stateChanged(int state);
     void on_ckLightData_stateChanged(int state);
+    void on_btnSwitch_clicked();
 
 private:
     Ui::frmSensorData *ui;
     QList<QCustomPlot *> plots;
+    bool isOff;
 
     void InitPlot();
     void InitPlot1();

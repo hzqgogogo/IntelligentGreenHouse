@@ -50,36 +50,17 @@
       <string>传感器信息：</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_5">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
         <property name="text">
-         <string>开 关 灯：</string>
+         <string> MAC地址：</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>光照强度：</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="le_light"/>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="le_humidity"/>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="le_temperature"/>
-      </item>
-      <item row="0" column="1">
+      <item row="0" column="1" colspan="2">
        <widget class="QLineEdit" name="le_mac"/>
       </item>
       <item row="1" column="0">
@@ -92,6 +73,9 @@
         </property>
        </widget>
       </item>
+      <item row="1" column="1" colspan="2">
+       <widget class="QLineEdit" name="le_temperature"/>
+      </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
@@ -102,10 +86,26 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
+      <item row="2" column="1" colspan="2">
+       <widget class="QLineEdit" name="le_humidity"/>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_4">
         <property name="text">
-         <string> MAC地址：</string>
+         <string>光照强度：</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1" colspan="2">
+       <widget class="QLineEdit" name="le_light"/>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>开 关 灯：</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -113,17 +113,53 @@
        </widget>
       </item>
       <item row="4" column="1">
-       <widget class="QPushButton" name="btn_switch">
+       <widget class="QPushButton" name="btnSwitch">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background: transparent;
+border:0px;</string>
+        </property>
         <property name="text">
          <string/>
         </property>
+        <property name="icon">
+         <iconset resource="other/rc.qrc">
+          <normaloff>:/image/switch_off.png</normaloff>:/image/switch_off.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
        </widget>
+      </item>
+      <item row="4" column="2">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>80</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </widget>
@@ -229,6 +265,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="other/rc.qrc"/>
+ </resources>
  <connections/>
 </ui>
