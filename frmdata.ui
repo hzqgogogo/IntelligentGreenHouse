@@ -54,7 +54,7 @@
       <item>
        <widget class="QPushButton" name="btnData1">
         <property name="text">
-         <string/>
+         <string>历史数据查询</string>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -112,6 +112,7 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="page_2"/>
        </widget>
       </item>
      </layout>

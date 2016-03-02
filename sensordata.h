@@ -14,6 +14,7 @@ class frmSensorData : public QWidget
 public:
     frmSensorData(QWidget *parent = NULL);
     ~frmSensorData();
+    void getSensorData(QString sensorTemperature, QString sensorHumidity, QString sensorLight, QString sensorSwitch);
 
 private slots:
     void on_ckMove_stateChanged(int state);
@@ -30,11 +31,16 @@ private:
     Ui::frmSensorData *ui;
     QList<QCustomPlot *> plots;
     bool isOff;
+    int index;
 
     void InitPlot();
     void InitPlot1();
     void InitPlot2();
     void InitPlot3();
+    void dataInput1(float sensorTemperature);
+    void dataInput2(float sensorHumidity);
+    void dataInput3(float sensorLight);
+    void setSwitchState(int flag);
 };
 
 #endif

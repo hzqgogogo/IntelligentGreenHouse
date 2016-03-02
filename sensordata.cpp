@@ -30,6 +30,7 @@ frmSensorData::frmSensorData(QWidget *parent)
     plots.append(ui->plot_humidity);
     plots.append(ui->plot_light);
     isOff = true;
+    index = 0;
 
     InitPlot();
     InitPlot1();
@@ -232,5 +233,54 @@ void frmSensorData::on_btnSwitch_clicked()
     {
         ui->btnSwitch->setIcon(QIcon(":/image/switch_off.png"));
         isOff = true;
+    }
+}
+
+void frmSensorData::getSensorData(QString sensorTemperature, QString sensorHumidity, QString sensorLight, QString sensorSwitch)
+{
+    dataInput1(sensorTemperature.toFloat());
+    dataInput2(sensorHumidity.toFloat());
+    dataInput3(sensorLight.toFloat());
+    setSwitchState(sensorSwitch.toInt());
+
+    index++;
+}
+
+void frmSensorData::dataInput1(float sensorTemperature)
+{
+    if(plots.at(0) != NULL)
+    {
+        plots.at(0)->graph(0)->addData(index, sensorTemperature);
+        plots.at(0)->replot();
+    }
+}
+
+void frmSensorData::dataInput2(float sensorHumidity)
+{
+    if(plots.at(1) != NULL)
+    {
+        plots.at(1)->graph(0)->addData(index, sensorHumidity);
+        plots.at(1)->replot();
+    }
+}
+
+void frmSensorData::dataInput3(float sensorLight)
+{
+    if(plots.at(2) != NULL)
+    {
+        plots.at(2)->graph(0)->addData(index, sensorLight);
+        plots.at(2)->replot();
+    }
+}
+
+void frmSensorData::setSwitchState(int flag)
+{
+    if(flag == 0)
+    {
+        ui->btnSwitch->setIcon(QIcon(":/image/switch_off.png"));
+    }
+    else if(flag == 1)
+    {
+        ui->btnSwitch->setIcon(QIcon(":/image/switch_on.png"));
     }
 }

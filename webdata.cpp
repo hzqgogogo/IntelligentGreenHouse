@@ -1,12 +1,28 @@
 #include "webdata.h"
 #include <QDebug>
 
+#define SENSORDATAREPONSE "sensorDataReponse"
+#define SENSORSTATE "sensorData"
+#define SENSORMAC "sensorMac"
+#define SENSORTEMPERATURE "sensorTemperature"
+#define SENSORHUMIDITY "sensorHumidity"
+#define SENSORLIGHT "sensorLight"
+#define SENSORSWITCH "sensorSwitch"
+
+#define SENSORSWITCHREPONSE "sensorSwitchReponse"
+#define RESULT "result"
+
+#define SOAPACTION "http://WebXml.com.cn/qqCheckOnline"
+#define HOST "www.webxml.com.cn"
+#define NAMESPACE "http://WebXml.com.cn/"
+#define POST "/webservices/qqOnlineWebService.asmx"
+
 WebData::WebData(QObject *parent)
 {
     connect(&http, SIGNAL(responseReady()), this, SLOT(getResponse()));
 
-    http.setAction("http://WebXml.com.cn/qqCheckOnline");
-    http.setHost("www.webxml.com.cn");
+    http.setAction(SOAPACTION);
+    http.setHost(HOST);
 }
 
 WebData::~WebData()
@@ -14,14 +30,23 @@ WebData::~WebData()
 
 }
 
-void WebData::submitRequest()
+void WebData::submitRequest(QString method, QMap<QString, QString> arg)
 {
     QtSoapMessage request;
 
-    request.setMethod("qqCheckOnline", "http://WebXml.com.cn/");
+    request.setMethod("qqCheckOnline", NAMESPACE);
     request.addMethodArgument("qqCode", "", "");
 
-    http.submitRequest(request, "/webservices/qqOnlineWebService.asmx");
+    http.submitRequest(request, POST);
+//    QList<QString> key;
+//    key = arg.keys();
+//    QtSoapMessage request;
+//    request.setMethod(method, NAMESPACE);
+//    for(int i = 0; i < arg.count(); i++)
+//    {
+//        request.addMethodArgument(key.at(i), "", arg.value(key.at(i)));
+//    }
+//    http.submitRequest(request, POST);
 }
 
 void WebData::getResponse()
@@ -63,7 +88,44 @@ void WebData::getResponse()
                 QDomNode node = list.at(i);
                 if(node.isElement())
                 {
-                    qDebug() << "hzq:" << node.toElement().tagName() << "::" << node.toElement().text();
+//                    qDebug() << "hzq:" << node.toElement().tagName() << "::" << node.toElement().text();
+                    QString tagName = node.toElement().tagName();
+                    QString text = node.toElement().text();
+                    if(tagName == SENSORSTATE)
+                    {
+                        if(text == "wait")
+                        {
+                            break;
+                        }
+                        else if(text == "close")
+                        {
+                            QString sensorMac;
+                            sensorMac = list.at(i+1).toElement().text();
+                            emit sigSensorClose(sensorMac);
+                            break;
+                        }
+                    }
+                    else if(tagName == SENSORMAC)
+                    {
+                        sensorData.sensorMac = text;
+                    }
+                    else if(tagName == SENSORTEMPERATURE)
+                    {
+                        sensorData.sensorTemperature = text;
+                    }
+                    else if(tagName == SENSORHUMIDITY)
+                    {
+                        sensorData.sensorHumidity = text;
+                    }
+                    else if(tagName == SENSORLIGHT)
+                    {
+                        sensorData.sensorLight = text;
+                    }
+                    else if(tagName == SENSORSWITCH)
+                    {
+                        sensorData.sensorSwitch = text;
+                        emit sigSensorData(sensorData);
+                    }
                 }
             }
         }

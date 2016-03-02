@@ -17,7 +17,8 @@ SOURCES += main.cpp \
             frmconfig.cpp \
             frmmore.cpp \
             frmlogin.cpp \
-            webdata.cpp
+            webdata.cpp \
+            getsensordata.cpp
 
 HEADERS += frmmain.h \
             usercontrol/frminputbox.h \
@@ -34,7 +35,8 @@ HEADERS += frmmain.h \
             frmconfig.h \
             frmmore.h \
             frmlogin.h \
-            webdata.h
+            webdata.h \
+            getsensordata.h
 
 FORMS += frmmain.ui \
             usercontrol/frminputbox.ui \
