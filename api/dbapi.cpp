@@ -11,8 +11,6 @@ DBAPI *DBAPI::_instance = 0;
 
 /* 说明:数据库查询及翻页模块
  * 功能:数据库查询及翻页处理
- * 作者:刘典武  QQ:517216493
- * 时间:2014-8-27  检查:2014-9-10
  */
 DBAPI::DBAPI(QObject *parent) :
     QObject(parent)
@@ -121,7 +119,7 @@ void DBAPI::BindDataSelect(QString tableName, QString orderColumn,
         PageCount = RowsCountAll / RowsCount + 1;
     }
 
-    //2014-10-9增加翻页按钮可用不可用处理,如果只有一页数据,则翻页按钮不可用
+    //增加翻页按钮可用不可用处理,如果只有一页数据,则翻页按钮不可用
     if (PageCount <= 1) {
         BtnFirst->setEnabled(false);
         BtnLast->setEnabled(false);

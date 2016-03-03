@@ -11,6 +11,7 @@ SOURCES += main.cpp \
             api/app.cpp \
             api/appinit.cpp \
             api/showdatetime.cpp \
+            api/dbapi.cpp \
             frmdata.cpp \
             qtsoap.cpp \
             sensordata.cpp \
@@ -29,6 +30,7 @@ HEADERS += frmmain.h \
             api/app.h \
             api/appinit.h \
             api/showdatetime.h \
+            api/dbapi.h \
             frmdata.h \
             qtsoap.h \
             sensordata.h \

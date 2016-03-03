@@ -42,6 +42,14 @@ void frmData::InitForm()
     }
 
     ui->btnData->click();
+
+    QDate d = QDate::currentDate();
+    ui->dateStart->setDate(d);
+    ui->dateEnd->setDate(d);
+
+    ui->tableData->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableData->horizontalHeader()->setStretchLastSection(true);
+    ui->tableData->setAlternatingRowColors(true);
 }
 
 void frmData::button_clicked()
