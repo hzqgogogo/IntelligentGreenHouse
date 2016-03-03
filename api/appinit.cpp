@@ -1,6 +1,7 @@
 #include "appinit.h"
 #include "myhelper.h"
 
+QSqlDatabase  AppInit::DbConn;
 AppInit::AppInit(QObject *parent) : QObject(parent)
 {
     mousePressed = false;
@@ -51,8 +52,7 @@ void AppInit::Load()
         exit(0);
     }
 
-    QSqlDatabase DbConn;
-    DbConn = QSqlDatabase::addDatabase("QSQLITE");
+    DbConn = QSqlDatabase::addDatabase("QSQLITE" , "adminDb");
     DbConn.setDatabaseName(dbPath);
     if (!DbConn.open()) {
         myHelper::ShowMessageBoxError("数据库打开失败,请检查数据库是否存在或者连接是否正常!");

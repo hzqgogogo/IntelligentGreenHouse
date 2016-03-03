@@ -26,6 +26,7 @@ private slots:
     void slotSensorData(getSensorData sensorData);
     void slotSensorClose(QString sensorMac);
     void slotTimer();
+    void on_btnSelect_clicked();
 
 private:
     Ui::frmData *ui;
@@ -34,6 +35,10 @@ private:
     QMap<QString, frmSensorData *> map;
     QString methodSensorData;
     QMap<QString, QString> argSensorData;
+    QList<QString> columnNames_Data;
+    QList<int> columnWidths_Data;
+    int pageCount;
+    QString whereSql;
 
     void frmDataInit();
     void InitForm();

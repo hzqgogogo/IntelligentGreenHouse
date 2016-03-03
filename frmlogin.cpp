@@ -2,6 +2,7 @@
 #include "ui_frmlogin.h"
 #include "api/myhelper.h"
 #include "frmmain.h"
+#include "api/appinit.h"
 
 frmLogin::frmLogin(QWidget *parent) :
     QDialog(parent),
@@ -42,7 +43,7 @@ void frmLogin::InitForm()
 
 void frmLogin::GetUserPwd(QStringList &userName, QStringList &userPwd)
 {
-    QSqlQuery query;
+    QSqlQuery query(AppInit::DbConn);
     QString sql = "select UserName,UserPwd from UserInfo";
     query.exec(sql);
     while (query.next()) {

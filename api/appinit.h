@@ -3,12 +3,14 @@
 
 #include <QObject>
 #include <QPoint>
+#include <QSqlDatabase>
 
 class AppInit : public QObject
 {
     Q_OBJECT
 public:
     explicit AppInit(QObject *parent = 0);
+    static QSqlDatabase DbConn;
 
     void Load();
 

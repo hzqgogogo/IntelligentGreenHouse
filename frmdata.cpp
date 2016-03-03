@@ -3,7 +3,17 @@
 #include <QDebug>
 #include "sensordata.h"
 #include "webdata.h"
+#include "api/myhelper.h"
+#include "api/dbapi.h"
 #include <QTimer>
+#include <QtSql>
+
+
+#define HOSTNAME "120.24.19.217"
+#define PORT 3306
+#define DATABASENAME "mycloud"
+#define USERNAME "root"
+#define PASSWD "root"
 
 frmData::frmData(QWidget *parent)
     : QWidget(parent),
@@ -32,6 +42,15 @@ void frmData::frmDataInit()
     connect(webData, SIGNAL(sigSensorData(getSensorData)), this, SLOT(slotSensorData(getSensorData)));
     connect(webData, SIGNAL(sigSensorClose(QString)), this, SLOT(slotSensorClose(QString)));
     connect(timer, SIGNAL(timeout()), this, SLOT(slotTimer()));
+
+    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+    db.setHostName(HOSTNAME);
+    db.setPort(PORT);
+    db.setDatabaseName(DATABASENAME);
+    db.setUserName(USERNAME);
+    db.setPassword(PASSWD);
+    if(!db.open())
+        myHelper::ShowMessageBoxError("连接远程数据库失败，查询传感器历史数据功能无法使用");
 }
 
 void frmData::InitForm()
@@ -42,6 +61,14 @@ void frmData::InitForm()
     }
 
     ui->btnData->click();
+
+    columnNames_Data.append("ID");
+    columnWidths_Data.append(100);
+
+    pageCount = 25;
+    whereSql = "where 1=1";
+    //设置需要显示数据的表格和翻页的按钮
+    DBAPI::Instance()->SetControl(ui->tableData, ui->labInfo, ui->btnFirst, ui->btnPre, ui->btnNext, ui->btnLast);
 
     QDate d = QDate::currentDate();
     ui->dateStart->setDate(d);
@@ -110,4 +137,9 @@ void frmData::slotSensorClose(QString sensorMac)
 void frmData::slotTimer()
 {
     webData->submitRequest(methodSensorData, argSensorData);
+}
+
+void frmData::on_btnSelect_clicked()
+{
+    DBAPI::Instance()->BindDataSelect("user", "userid", "desc", whereSql, pageCount, columnNames_Data, columnWidths_Data);
 }

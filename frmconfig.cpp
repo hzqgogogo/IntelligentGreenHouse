@@ -2,6 +2,7 @@
 #include "ui_frmconfig.h"
 #include "api/app.h"
 #include "api/myhelper.h"
+#include "api/appinit.h"
 
 frmConfig::frmConfig(QWidget *parent)
     : QWidget(parent), ui(new Ui::frmConfig)
@@ -55,7 +56,7 @@ void frmConfig::on_btnUpdata_clicked()
         return;
     }
 
-    QSqlQuery query;
+    QSqlQuery query(AppInit::DbConn);
     QString sql = QString("update UserInfo set UserPwd='%1' where UserName='%2'")
             .arg(PwdNewX).arg(App::CurrentUserName);
     query.exec(sql);
