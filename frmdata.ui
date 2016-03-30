@@ -267,6 +267,9 @@
                <property name="toolTip">
                 <string>第一页</string>
                </property>
+               <property name="text">
+                <string>首页</string>
+               </property>
                <property name="iconSize">
                 <size>
                  <width>18</width>
@@ -290,6 +293,9 @@
                 </size>
                </property>
                <property name="toolTip">
+                <string>上一页</string>
+               </property>
+               <property name="text">
                 <string>上一页</string>
                </property>
                <property name="iconSize">
@@ -317,6 +323,9 @@
                <property name="toolTip">
                 <string>下一页</string>
                </property>
+               <property name="text">
+                <string>下一页</string>
+               </property>
                <property name="iconSize">
                 <size>
                  <width>18</width>
@@ -341,6 +350,9 @@
                </property>
                <property name="toolTip">
                 <string>末一页</string>
+               </property>
+               <property name="text">
+                <string>末页</string>
                </property>
                <property name="iconSize">
                 <size>

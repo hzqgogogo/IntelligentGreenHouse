@@ -69,7 +69,8 @@ void frmMain::InitStyle()
     this->setProperty("Form", true);
     this->setProperty("CanMove", true);
     this->setWindowTitle(ui->lab_Title->text());
-    this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowMinimizeButtonHint);
+    this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowSystemMenuHint
+                         | Qt::WindowMinimizeButtonHint);
 
     IconHelper::Instance()->SetIcoMain(ui->lab_Ico, 40);
     IconHelper::Instance()->SetIcoMin(ui->btnMenu_Min);

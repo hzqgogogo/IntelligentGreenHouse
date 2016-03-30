@@ -1,7 +1,7 @@
 #include "app.h"
 #include "myhelper.h"
 
-QString App::AppTitle = "智能大棚管理系统";
+QString App::AppTitle = "IPV6物联网管理系统";
 QString App::AppName = "Intelligence";
 QString App::AppPath = "";
 int App::AppFontSize = 10;
@@ -37,8 +37,8 @@ void App::ReadConfig()
     set->beginGroup("AppConfig");
 
     App::AppTitle = set->value("AppTitle").toString();
-    App::AppStyle = set->value("AppStyle").toString();
-    App::AppCom= set->value("AppCom").toString();
+//    App::AppStyle = set->value("AppStyle").toString();
+//    App::AppCom= set->value("AppCom").toString();
 
     set->endGroup();
 }
@@ -50,8 +50,8 @@ void App::WriteConfig()
     set->beginGroup("AppConfig");
 
     set->setValue("AppTitle", App::AppTitle);
-    set->setValue("AppStyle", App::AppStyle);
-    set->setValue("AppCom", App::AppCom);
+//    set->setValue("AppStyle", App::AppStyle);
+//    set->setValue("AppCom", App::AppCom);
 
     set->endGroup();
 }

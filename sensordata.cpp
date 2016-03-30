@@ -78,14 +78,6 @@ void frmSensorData::InitPlot()
         plotGradient.setColorAt(1, QColor(50, 50, 50));
         plot->setBackground(plotGradient);
 
-        //        //设置坐标背景色
-        QLinearGradient axisRectGradient;
-        axisRectGradient.setStart(0, 0);
-        axisRectGradient.setFinalStop(0, 350);
-        axisRectGradient.setColorAt(0, QColor(80, 80, 80));
-        axisRectGradient.setColorAt(1, QColor(30, 30, 30));
-        plot->axisRect()->setBackground(axisRectGradient);
-
         //设置图例提示位置及背景色
         plot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignTop | Qt::AlignRight);
         plot->legend->setBrush(QColor(255, 255, 255, 200));
