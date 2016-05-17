@@ -45,6 +45,8 @@ public:
         QTextCodec::setCodecForLocale(codec);
         QTextCodec::setCodecForCStrings(codec);
         QTextCodec::setCodecForTr(codec);
+#else
+        QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
 #endif
     }
 

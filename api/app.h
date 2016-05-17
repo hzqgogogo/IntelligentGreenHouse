@@ -27,7 +27,6 @@ public:
     static QString CurrentUserPwd;  //当前用户密码
 
     static QString AppStyle;        //应用程序样式
-    static QString AppCom;          //串口号
 
     static void ReadConfig();       //读取配置文件,在main函数最开始加载程序载入
     static void WriteConfig();      //写入配置文件,在更改配置文件程序关闭时调用
