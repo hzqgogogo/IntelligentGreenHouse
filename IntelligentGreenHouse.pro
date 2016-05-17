@@ -1,10 +1,10 @@
 QT += network sql xml
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 TARGET = IntelligentGreenHouse
 TEMPLATE = app
 
 SOURCES += main.cpp \
             frmmain.cpp \
-            usercontrol/frminputbox.cpp \
             usercontrol/frmmessagebox.cpp \
             usercontrol/qcustomplot.cpp \
             api/iconhelper.cpp \
@@ -22,7 +22,6 @@ SOURCES += main.cpp \
             getsensordata.cpp
 
 HEADERS += frmmain.h \
-            usercontrol/frminputbox.h \
             usercontrol/frmmessagebox.h \
             usercontrol/qcustomplot.h \
             api/myhelper.h \
@@ -41,7 +40,6 @@ HEADERS += frmmain.h \
             getsensordata.h
 
 FORMS += frmmain.ui \
-            usercontrol/frminputbox.ui \
             usercontrol/frmmessagebox.ui \
             frmdata.ui \
             sensordata.ui \

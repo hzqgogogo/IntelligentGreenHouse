@@ -3151,7 +3151,12 @@ void QtSoapHttpTransport::submitRequest(QtSoapMessage &request, const QString &p
 {
     QNetworkRequest networkReq;
     networkReq.setHeader(QNetworkRequest::ContentTypeHeader, QLatin1String("text/xml;charset=utf-8"));
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+    networkReq.setRawHeader("SOAPAction", soapAction.toLatin1());
+#else
     networkReq.setRawHeader("SOAPAction", soapAction.toAscii());
+#endif
+
     url.setPath(path);
     networkReq.setUrl(url);
 

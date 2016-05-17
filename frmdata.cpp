@@ -34,7 +34,7 @@ void frmData::frmDataInit()
 {
     webData = new WebData(this);
     timer = new QTimer(this);
-    timer->start(5000);
+    timer->start(4000);
 
     methodSensorData = "sensorDataRequest";
     argSensorData.insert("sensorData", "sensordata");
@@ -49,8 +49,8 @@ void frmData::frmDataInit()
     db.setDatabaseName(DATABASENAME);
     db.setUserName(USERNAME);
     db.setPassword(PASSWD);
-    if(!db.open())
-        myHelper::ShowMessageBoxError("连接远程数据库失败，查询传感器历史数据功能无法使用");
+//    if(!db.open())
+//        myHelper::ShowMessageBoxError("连接远程数据库失败，查询传感器历史数据功能无法使用");
 }
 
 void frmData::InitForm()
@@ -94,8 +94,8 @@ void frmData::button_clicked()
         ui->stackedWidget->setCurrentIndex(0);
     else if(name == "历史数据查询")
         ui->stackedWidget->setCurrentIndex(1);
-    frmSensorData *sensor = new frmSensorData;
-    ui->tabWidget->addTab(sensor,"test");
+ //   frmSensorData *sensor = new frmSensorData;
+   // ui->tabWidget->addTab(sensor,"test");
 }
 
 void frmData::slotSensorData(getSensorData sensorData)
@@ -106,7 +106,7 @@ void frmData::slotSensorData(getSensorData sensorData)
     {
         if(key.at(i) == sensorData.sensorMac)
         {
-            flag == true;
+            flag = true;
             break;
         }
     }
@@ -117,7 +117,7 @@ void frmData::slotSensorData(getSensorData sensorData)
         map.insert(sensorData.sensorMac, tmpSensorData);
     }
 
-    map.value(sensorData.sensorMac)->getSensorData(sensorData.sensorTemperature, sensorData.sensorHumidity,
+    map.value(sensorData.sensorMac)->getSensorData(sensorData.sensorMac, sensorData.sensorTemperature, sensorData.sensorHumidity,
                                                    sensorData.sensorLight, sensorData.sensorSwitch);
 }
 

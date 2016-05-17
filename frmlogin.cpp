@@ -3,6 +3,7 @@
 #include "api/myhelper.h"
 #include "frmmain.h"
 #include "api/appinit.h"
+#include <QMovie>
 
 frmLogin::frmLogin(QWidget *parent) :
     QDialog(parent),
@@ -30,6 +31,9 @@ void frmLogin::InitStyle()
     IconHelper::Instance()->SetIcoClose(ui->btnMenu_Close);
     connect(ui->btnMenu_Close, SIGNAL(clicked()), this, SLOT(close()));
     connect(ui->btnClose,SIGNAL(clicked()),this,SLOT(close()));
+    QMovie *movie = new QMovie(QString(":/image/12.gif"));
+    ui->labTitle->setMovie(movie);
+    movie->start();
 }
 
 void frmLogin::InitForm()
@@ -62,7 +66,7 @@ void frmLogin::on_btnLogin_clicked()
     }
 
     int index = ui->cboxUserName->currentIndex();
-    //增加超级管理员密码123登录
+
     if (userPwd == UserPwd[index]) {
         App::CurrentUserName = UserName[index];
         App::CurrentUserPwd = UserPwd[index];
@@ -85,4 +89,5 @@ void frmLogin::on_cboxUserName_activated(int index)
 {
     ui->txtUserPwd->setFocus();
 }
+
 

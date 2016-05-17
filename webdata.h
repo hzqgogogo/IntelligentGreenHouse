@@ -12,6 +12,10 @@ public:
     WebData(QObject *parent = 0);
     ~WebData();
 
+    static QString host;
+    static QString port;
+    static QString soapAction;
+
 signals:
     void sigSensorData(getSensorData sensorData);
     void sigSensorClose(QString sensorMac);

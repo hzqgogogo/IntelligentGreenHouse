@@ -44,7 +44,7 @@ void frmMain::on_btnMenu_Max_clicked()
         IconHelper::Instance()->SetIcoNormal(ui->btnMenu_Max);
         ui->btnMenu_Max->setToolTip("最大化");
         this->setProperty("CanMove", true);
-        this->layout()->setMargin(1);
+        this->layout()->setMargin(0);
     } else {
         location = this->geometry();
         this->setGeometry(qApp->desktop()->availableGeometry());

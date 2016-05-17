@@ -188,12 +188,18 @@ border:0px;</string>
           <property name="text">
            <string>阴影背景</string>
           </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
          </widget>
         </item>
         <item row="1" column="0">
          <widget class="QCheckBox" name="ckLegend">
           <property name="text">
            <string>图例说明</string>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
           </property>
          </widget>
         </item>

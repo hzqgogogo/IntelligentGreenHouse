@@ -12,17 +12,26 @@
 #define SENSORSWITCHREPONSE "sensorSwitchReponse"
 #define RESULT "result"
 
-#define SOAPACTION "http://WebXml.com.cn/qqCheckOnline"
-#define HOST "www.webxml.com.cn"
-#define NAMESPACE "http://WebXml.com.cn/"
-#define POST "/webservices/qqOnlineWebService.asmx"
+//#define SOAPACTION "http://WebXml.com.cn/qqCheckOnline"
+//#define HOST "www.webxml.com.cn"
+//#define NAMESPACE "http://WebXml.com.cn/"
+//#define POST "/webs                                                                                                                                                                                                                                                               ervices/qqOnlineWebService.asmx"
+
+#define SOAPACTION "http://139.129.52.47:8080/FFBUS_WS/service/FFBUS"
+#define HOST "139.129.52.47"
+#define NAMESPACE "http://impl.webservice.eis.com/"
+#define POST "/FFBUS_WS/service/FFBUS"
+
+QString WebData::host = "139.129.52.47";
+QString WebData::port = "8080";
+QString WebData::soapAction = "http://139.129.52.47:8080/FFBUS_WS/service/FFBUS";
 
 WebData::WebData(QObject *parent)
 {
     connect(&http, SIGNAL(responseReady()), this, SLOT(getResponse()));
 
-    http.setAction(SOAPACTION);
-    http.setHost(HOST);
+    http.setAction(soapAction);
+    http.setHost(host, port.toInt());
 }
 
 WebData::~WebData()
@@ -32,28 +41,32 @@ WebData::~WebData()
 
 void WebData::submitRequest(QString method, QMap<QString, QString> arg)
 {
-    QtSoapMessage request;
-
-    request.setMethod("qqCheckOnline", NAMESPACE);
-    request.addMethodArgument("qqCode", "", "");
-
-    http.submitRequest(request, POST);
-//    QList<QString> key;
-//    key = arg.keys();
 //    QtSoapMessage request;
-//    request.setMethod(method, NAMESPACE);
-//    for(int i = 0; i < arg.count(); i++)
-//    {
-//        request.addMethodArgument(key.at(i), "", arg.value(key.at(i)));
-//    }
+
+//    request.setMethod("sensorSwitchRequest", NAMESPACE);
+//    request.addMethodArgument("sensorSwitch", "", "1");
+//    request.addMethodArgument("sensorMac", "", "1");
+//    request.setMethod("qqCheckOnline", NAMESPACE);
+//    request.addMethodArgument("qqCode", "", "");
+
+
 //    http.submitRequest(request, POST);
+    QList<QString> key;
+    key = arg.keys();
+    QtSoapMessage request;
+    request.setMethod(method, NAMESPACE);
+    for(int i = 0; i < arg.count(); i++)
+    {
+        request.addMethodArgument(key.at(i), "", arg.value(key.at(i)));
+    }
+    http.submitRequest(request, POST);
 }
 
 void WebData::getResponse()
 {
     const QtSoapMessage &resp = http.getResponse();
     if (resp.isFault()) {
-        qDebug() << resp.faultString().value().toString();
+        qDebug() << "hzq:" << resp.faultString().value().toString();
         return;
     }
 
@@ -75,7 +88,8 @@ void WebData::getResponse()
     //        QDomNode resultNode =nodeList.at(0);
     //        qDebug() << resultNode.toElement().text();
     //    }
-    QDomNodeList nodeList = doc.elementsByTagName("qqCheckOnlineResponse");
+//    QDomNodeList nodeList = doc.elementsByTagName("qqCheckOnlineResponse");
+    QDomNodeList nodeList = doc.elementsByTagName("return");
     QDomNode n = nodeList.at(0);
     while(!n.isNull())
     {

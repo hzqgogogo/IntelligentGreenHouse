@@ -8,13 +8,14 @@ namespace Ui {
 class frmSensorData;
 }
 
+class WebData;
 class frmSensorData : public QWidget
 {
     Q_OBJECT
 public:
     frmSensorData(QWidget *parent = NULL);
     ~frmSensorData();
-    void getSensorData(QString sensorTemperature, QString sensorHumidity, QString sensorLight, QString sensorSwitch);
+    void getSensorData(QString sensorMac, QString sensorTemperature, QString sensorHumidity, QString sensorLight, QString sensorSwitch);
 
 private slots:
     void on_ckMove_stateChanged(int state);
@@ -32,6 +33,11 @@ private:
     QList<QCustomPlot *> plots;
     bool isOff;
     int index;
+    WebData *webData;
+    QString methodSensorData;
+    QMap<QString, QString> argSensorData;
+    int ledState;
+    int ledStateNum;
 
     void InitPlot();
     void InitPlot1();

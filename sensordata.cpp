@@ -1,6 +1,7 @@
 #include "sensordata.h"
 #include "ui_sensordata.h"
 #include "api/app.h"
+#include "webdata.h"
 
 #define TextColor QColor(255,255,255)
 
@@ -26,16 +27,23 @@ frmSensorData::frmSensorData(QWidget *parent)
 {
     ui->setupUi(this);
 
+    webData = new WebData(this);
+
     plots.append(ui->plot_temperature);
     plots.append(ui->plot_humidity);
     plots.append(ui->plot_light);
     isOff = true;
     index = 0;
+    ledState = -1;
+    ledStateNum = 0;
 
     InitPlot();
     InitPlot1();
     InitPlot2();
     InitPlot3();
+
+    ui->ckBackground->setChecked(true);
+    ui->ckLegend->setChecked(true);
 }
 
 frmSensorData::~frmSensorData()
@@ -94,7 +102,7 @@ void frmSensorData::InitPlot1()
                 QCPScatterStyle(QCPScatterStyle::ssCircle,
                                 QPen(Plot1_DotColor, LineWidth),
                                 QBrush(Plot1_DotColor), DotWidth));
-    plots.at(0)->xAxis->setRange(0, 100);
+    plots.at(0)->xAxis->setRange(0, 40);
     plots.at(0)->yAxis->setRange(0, 40);
 }
 
@@ -107,7 +115,7 @@ void frmSensorData::InitPlot2()
                 QCPScatterStyle(QCPScatterStyle::ssCircle,
                                 QPen(Plot2_DotColor,LineWidth),
                                 QBrush(Plot2_DotColor), DotWidth));
-    plots.at(1)->xAxis->setRange(0, 100);
+    plots.at(1)->xAxis->setRange(0, 40);
     plots.at(1)->yAxis->setRange(0, 100);
 }
 
@@ -120,7 +128,7 @@ void frmSensorData::InitPlot3()
                 QCPScatterStyle(QCPScatterStyle::ssCircle,
                                 QPen(Plot3_DotColor,LineWidth),
                                 QBrush(Plot3_DotColor), DotWidth));
-    plots.at(2)->xAxis->setRange(0, 100);
+    plots.at(2)->xAxis->setRange(0, 40);
     plots.at(2)->yAxis->setRange(0, 1000);
 }
 
@@ -226,14 +234,36 @@ void frmSensorData::on_btnSwitch_clicked()
         ui->btnSwitch->setIcon(QIcon(":/image/switch_off.png"));
         isOff = true;
     }
+
+    methodSensorData = "sensorSwitchRequest";
+    argSensorData.insert("sensorSwitch", QString("%1").arg(!isOff));
+    argSensorData.insert("sensorMac", ui->le_mac->text());
+
+    webData->submitRequest(methodSensorData, argSensorData);
 }
 
-void frmSensorData::getSensorData(QString sensorTemperature, QString sensorHumidity, QString sensorLight, QString sensorSwitch)
+void frmSensorData::getSensorData(QString sensorMac, QString sensorTemperature, QString sensorHumidity, QString sensorLight, QString sensorSwitch)
 {
+    ui->le_mac->setText(sensorMac);
     dataInput1(sensorTemperature.toFloat());
     dataInput2(sensorHumidity.toFloat());
     dataInput3(sensorLight.toFloat());
-    setSwitchState(sensorSwitch.toInt());
+
+//    if(ledState != sensorSwitch.toInt())
+//    {
+//        ledState = sensorSwitch.toInt();
+//        ledStateNum = 1;
+//    }
+//    else
+        ledStateNum++;
+
+    qDebug() << "hzq:" << ledState;
+    if(ledStateNum == 5)
+    {
+        qDebug() << "hzq";
+        setSwitchState(sensorSwitch.toInt());
+        ledStateNum = 1;
+    }
 
     index++;
 }
@@ -243,6 +273,7 @@ void frmSensorData::dataInput1(float sensorTemperature)
     if(plots.at(0) != NULL)
     {
         plots.at(0)->graph(0)->addData(index, sensorTemperature);
+        ui->le_temperature->setText(QString("%1").arg(sensorTemperature));
         plots.at(0)->replot();
     }
 }
@@ -252,6 +283,7 @@ void frmSensorData::dataInput2(float sensorHumidity)
     if(plots.at(1) != NULL)
     {
         plots.at(1)->graph(0)->addData(index, sensorHumidity);
+        ui->le_humidity->setText(QString("%1").arg(sensorHumidity));
         plots.at(1)->replot();
     }
 }
@@ -261,6 +293,7 @@ void frmSensorData::dataInput3(float sensorLight)
     if(plots.at(2) != NULL)
     {
         plots.at(2)->graph(0)->addData(index, sensorLight);
+        ui->le_light->setText(QString("%1").arg(sensorLight));
         plots.at(2)->replot();
     }
 }
